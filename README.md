@@ -36,7 +36,7 @@
       margin-bottom: 1rem;
     }
 
-    .follow-btn, .reveal-btn {
+    .follow-btn, .verify-btn {
       background-color: #000;
       color: #d4a14e;
       border: none;
@@ -49,11 +49,20 @@
       transition: background 0.3s ease;
     }
 
-    .follow-btn:hover, .reveal-btn:hover {
+    .follow-btn:hover, .verify-btn:hover {
       background-color: #222;
     }
 
-    #wifi-info {
+    input {
+      padding: 0.8rem;
+      border-radius: 8px;
+      border: 1px solid #000;
+      margin-top: 1rem;
+      width: 250px;
+      font-size: 1rem;
+    }
+
+    #wifi-info, #verifying {
       display: none;
       margin-top: 2rem;
       padding: 1rem;
@@ -61,6 +70,11 @@
       color: #ffd700;
       border-radius: 10px;
       font-size: 1.1rem;
+    }
+
+    #verifying {
+      color: #000;
+      background: #ffd700;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
@@ -74,13 +88,32 @@
     <button class="follow-btn">Follow @cajeriaventures</button>
   </a>
 
-  <button class="reveal-btn" onclick="document.getElementById('wifi-info').style.display='block'">
-    I've Followed – Show WiFi Info
-  </button>
+  <input type="text" id="username" placeholder="Enter your Instagram username" />
+
+  <button class="verify-btn" onclick="verifyFollow()">Verify & Show WiFi Info</button>
+
+  <div id="verifying">Verifying your follow... please wait ⏳</div>
 
   <div id="wifi-info">
     <p><strong>WiFi Name:</strong> cajetan</p>
     <p><strong>Password:</strong> Uaremine</p>
   </div>
+
+  <script>
+    function verifyFollow() {
+      const username = document.getElementById('username').value.trim();
+      if (username === '') {
+        alert('Please enter your Instagram username.');
+        return;
+      }
+
+      document.getElementById('verifying').style.display = 'block';
+
+      setTimeout(() => {
+        document.getElementById('verifying').style.display = 'none';
+        document.getElementById('wifi-info').style.display = 'block';
+      }, 4000); // Simulate 4-second verification delay
+    }
+  </script>
 </body>
 </html>
